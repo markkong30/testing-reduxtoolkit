@@ -1,12 +1,16 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import FollowersList from "../FollowersList";
+import { store } from "../../../store/store";
 
 const MockFollowersList = () => {
 	return (
-		<BrowserRouter>
-			<FollowersList />
-		</BrowserRouter>
+		<Provider store={store}>
+			<BrowserRouter>
+				<FollowersList />
+			</BrowserRouter>
+		</Provider>
 	);
 };
 
