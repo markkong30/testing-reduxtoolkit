@@ -9,7 +9,6 @@ export default function FollowersList() {
 	// const [followers, setFollowers] = useState(null);
 	const { followers } = useSelector(getFollowers);
 	const dispatch = useDispatch();
-	console.log(followers);
 
 	useEffect(() => {
 		dispatch(fetchFollowers());
@@ -28,14 +27,16 @@ export default function FollowersList() {
 			<div>
 				{followers &&
 					followers?.map((follower, index) => (
-						<div key={index} className="follower-item" data-testid={`follower-item-${index}`}>
+						<div key={index} className="follower-item" data-testid={`follower-item-${follower.cell}`}>
 							<img src={follower.picture.large} />
 							<div className="followers-details">
 								<div className="follower-item-name">
 									<h4>{follower.name.first}</h4> <h4>{follower.name.last}</h4>
 								</div>
 								<p>{follower.login.username}</p>
-								<button onClick={() => handleRemove(follower.cell)}>Remove</button>
+								<button data-testid={`btn-remove-${follower.cell}`} onClick={() => handleRemove(follower.cell)}>
+									Remove
+								</button>
 							</div>
 						</div>
 					))}
